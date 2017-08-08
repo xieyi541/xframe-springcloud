@@ -34,9 +34,13 @@ public class UserController {
     }
     
     @RequestMapping(value = "/hello" ,method = RequestMethod.GET)
-    public String hello(String userName, String password){
+    public String hello(String userName, String password) throws Exception{
     	ServiceInstance instance = client.getLocalServiceInstance();
-    	logger.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", userName:" + userName);
+    	//random sleep
+    	int sleepTime = new java.util.Random().nextInt(3000);
+    	logger.info("sleep time:"+sleepTime);
+    	Thread.sleep(sleepTime);
+    	logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", userName:" + userName);
     	return "{\"code\":\"0000\", \"message\":\"hello\"}";
     }
 }
